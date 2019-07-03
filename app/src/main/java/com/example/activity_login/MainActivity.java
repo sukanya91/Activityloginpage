@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                //validate(Name.getText().toString(), Password.getText().toString());
                 loginUser();
+                Intent i = new Intent(MainActivity.this, homePage.class);
+                startActivity(i);
 
             }
         });
@@ -80,8 +82,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerUser();
-                Intent i = new Intent(MainActivity.this, homePage.class);
-                startActivity(i);
+
             }
         });
 

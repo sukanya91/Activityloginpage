@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,7 +20,7 @@ public class scores extends AppCompatActivity {
 
     ListView listViewScores;
 
-    DatabaseReference databaseScores;
+    DatabaseReference db;
 
     List<TotalScores> scores;
 
@@ -29,7 +30,7 @@ public class scores extends AppCompatActivity {
         setContentView(R.layout.activity_scores);
 
         Intent intent = getIntent();
-        databaseScores = FirebaseDatabase.getInstance().getReference("scores").child(intent.getStringExtra("SCORE_ID"));
+        db = FirebaseDatabase.getInstance().getReference("scores").child(intent.getStringExtra("SCORE_ID"));
         listViewScores = findViewById(R.id.listViewScores);
         scores = new ArrayList<>();
 
@@ -38,16 +39,19 @@ public class scores extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        databaseScores.addValueEventListener(new ValueEventListener() {
+        db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+//                String value = dataSnapshot.getValue()(String.class);
+//                Log.d(TAG, "Value is:" +value);
                 scores.clear();
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     TotalScores score = postSnapshot.getValue(TotalScores.class);
                     scores.add(score);
                 }
                 ScoreListAdapter myScoreAdapter = new ScoreListAdapter(scores.this, scores);
-                        //listViewScores.setAdapter(myScoreAdapter);
+                        listViewScores.setAdapter(myScoreAdapter);
             }
 
 

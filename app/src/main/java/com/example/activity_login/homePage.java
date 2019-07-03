@@ -52,8 +52,15 @@ public class homePage extends AppCompatActivity implements View.OnClickListener 
         scissors = (Button) findViewById(R.id.btn_scissors);
         tv_score =(TextView) findViewById(R.id.tv_score);
         btn_scores= (Button) findViewById(R.id.btn_scores);
-       
-       
+        btn_scores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(homePage.this, scores.class);
+                 startActivity(i);
+            }
+           
+        });
+
         rock.setOnClickListener((View.OnClickListener) this);
         paper.setOnClickListener( this);
         scissors.setOnClickListener(this);
@@ -85,7 +92,13 @@ public class homePage extends AppCompatActivity implements View.OnClickListener 
 //        });
 //    }
 
-
+//
+//      public void btn_scoresClick(View view) {
+//
+//          Intent i = new Intent(homePage.this, scores.class);
+//          startActivity(i);
+//
+//      }
 
     public void onClick(View v){
         int id = v.getId();
@@ -186,11 +199,11 @@ public class homePage extends AppCompatActivity implements View.OnClickListener 
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
-    public void btn_scoresClick(View view) {
 
-        Intent i = new Intent(homePage.this, scores.class);
-        startActivity(i);
 
-    }
+
+
+
+
 
 }
